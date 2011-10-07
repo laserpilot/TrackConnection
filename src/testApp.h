@@ -27,18 +27,18 @@ public:
 	float 	counter;
 	bool	bSmooth;
 	
-    ofTexture tex;
+    //Image Load
+    ofImage Glossy;
     
+    //Syphon junk
+    ofTexture tex;
 	ofxSyphonServer mainOutputSyphonServer;
 	ofxSyphonServer individualTextureSyphonServer;
-	
 	ofxSyphonClient mClient;
-    
-    ofVideoGrabber 		vidGrabber;
 
-    
+    //Camera input
+    ofVideoGrabber          vidGrabber;
     ofxCvColorImage			colorImg;
-    
     ofxCvGrayscaleImage 	grayImg;
     ofxCvGrayscaleImage 	grayBg;
     ofxCvGrayscaleImage 	grayDiff;
@@ -56,15 +56,26 @@ public:
     int                 ptAvg;
     int                 ptSum;
     
+    //How many people to track
+    int                 trackNum;
+    
+    //Centroid points mapped to fit fullscreen
     int                 mapCentX;
     int                 mapCentY;
     int                 mapPrevCentX;
     int                 mapPrevCentY;
     
-    int                 connectDist[20][20];
+    //Connections
+    int                 connectDist[100][100];
+    int                 blobConnect[100];
+    int                 bigShot;
+    int                 connectCount;
     
+    //Style
     float               linethick;
+    ofTrueTypeFont      Bauer;
     
+    //Misc
     int                 tog;
     
 
