@@ -54,7 +54,7 @@ void testApp::setup(){
     //How many people do you want to track?
     trackNum = 10;
     
-	//mainOutputSyphonServer.setName("Screen Output");
+	mainOutputSyphonServer.setName("Screen Output");
     
 
 }
@@ -107,7 +107,7 @@ void testApp::draw(){
     
 
     //Draw Video
-    colorImg.draw(0,0,ofGetWidth(),ofGetHeight());
+    //colorImg.draw(0,0,ofGetWidth(),ofGetHeight());
 
 
     
@@ -228,7 +228,7 @@ void testApp::draw(){
     
     ofSetColor(255, 255, 255);
 
-	//mainOutputSyphonServer.publishScreen();
+	mainOutputSyphonServer.publishScreen();
     
     
 }
