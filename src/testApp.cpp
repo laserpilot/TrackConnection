@@ -137,8 +137,16 @@ void testApp::draw(){
                     blobConnect[i]++;
                     ofLine(ofMap(contourFinder.blobs[i].centroid.x,0, camWidth,0,ofGetWidth()),
                            ofMap(contourFinder.blobs[i].centroid.y,0,camHeight,0,.75*ofGetWidth()),
-                           ofMap(contourFinder.blobs[j].centroid.x,0, camWidth,0,ofGetWidth()),
-                           ofMap(contourFinder.blobs[j].centroid.y,0,camHeight,0,.75*ofGetWidth()));
+                           ofMap(sin(ofGetElapsedTimef()), 
+                                 -1, 
+                                  1, 
+                                  ofMap(contourFinder.blobs[i].centroid.x,0, camWidth,0,ofGetWidth()),
+                                  ofMap(contourFinder.blobs[j].centroid.x,0, camWidth,0,ofGetWidth())),
+                           ofMap(sin(ofGetElapsedTimef()), 
+                                 -1, 
+                                 1, 
+                                 ofMap(contourFinder.blobs[i].centroid.y,0, camWidth,0,ofGetWidth()),
+                                 ofMap(contourFinder.blobs[j].centroid.y,0, camWidth,0,ofGetWidth())));
                     
                     //ofDrawBitmapString(ofToString(connectDist [i][j]), mapCentX,mapCentY);
                     
