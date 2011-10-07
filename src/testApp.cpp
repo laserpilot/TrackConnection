@@ -52,7 +52,7 @@ void testApp::setup(){
     bSmooth = false;
 	
     //How many people do you want to track?
-    trackNum = 30;
+    trackNum = 10;
     
 	//mainOutputSyphonServer.setName("Screen Output");
     
@@ -133,8 +133,31 @@ void testApp::draw(){
                 if (connectDist [i][j] < 200) {
                     //ofMap(sin(ofGetElapsedTimef()), -1, 1, 50, 400)
                     
-                    ofSetLineWidth(ofMap(connectDist [i][j], 0, ofMap(sin(ofGetElapsedTimef()), -1, 1, 50, 400), 10.0, 0.1));
+                    ofSetLineWidth(ofMap(connectDist[i][j], 0, 200, 10.0, 0.1));
                     blobConnect[i]++;
+                    ofSetColor(i*20,i*25,i*20, 127);
+                    ofLine(ofMap(sin(ofGetElapsedTimef()), 
+                                 -1, 
+                                 1, 
+                                 ofMap(contourFinder.blobs[j].centroid.x,0, camWidth,0,ofGetWidth()),
+                                 ofMap(contourFinder.blobs[i].centroid.x,0, camWidth,0,ofGetWidth())),
+                           ofMap(sin(ofGetElapsedTimef()), 
+                                 -1, 
+                                 1, 
+                                 ofMap(contourFinder.blobs[j].centroid.y,0, camHeight,0,.75*ofGetWidth()),
+                                 ofMap(contourFinder.blobs[i].centroid.y,0, camHeight,0,.75*ofGetWidth())),
+                           ofMap(sin(ofGetElapsedTimef()), 
+                                 -1, 
+                                 1, 
+                                 ofMap(contourFinder.blobs[i].centroid.x,0, camWidth,0,ofGetWidth()),
+                                 ofMap(contourFinder.blobs[j].centroid.x,0, camWidth,0,ofGetWidth())),
+                           ofMap(sin(ofGetElapsedTimef()), 
+                                 -1, 
+                                 1, 
+                                 ofMap(contourFinder.blobs[i].centroid.y,0, camHeight,0,.75*ofGetWidth()),
+                                 ofMap(contourFinder.blobs[j].centroid.y,0, camHeight,0,.75*ofGetWidth()))
+                           );
+                     ofSetColor(i*20,i*25,i*20, 127);
                     ofLine(ofMap(contourFinder.blobs[i].centroid.x,0, camWidth,0,ofGetWidth()),
                            ofMap(contourFinder.blobs[i].centroid.y,0,camHeight,0,.75*ofGetWidth()),
                            ofMap(sin(ofGetElapsedTimef()), 
@@ -164,24 +187,32 @@ void testApp::draw(){
         //Which blob has the most connections to the rest?
         if(blobConnect[bigShot] < blobConnect[i]){  
             bigShot = i;
+            ofSetColor(255, 0, 0,60);
+            Glossy.draw(mapCentX-(ofMap(blobConnect[i], 0, 40, 10, 200)/2), 
+                        mapCentY-(ofMap(blobConnect[i], 0, 40, 10, 200)/2), 
+                        ofMap(blobConnect[i], 0, 40, 10, 200),
+                        ofMap(blobConnect[i], 0, 40, 10, 200));
             ofSetColor(255, 0, 0);
         }
         else {
             
-            ofSetColor(i*5,i*4,i*6, 60);
+            ofSetColor(i*5,i*4,i*6);
         }
         
         connectCount = (connectCount + blobConnect[i]);
         
         ofFill();
-        ofCircle(
+        /*ofCircle(
                  mapCentX, 
                  mapCentY, 
                  ofMap(blobConnect[i], 0, 10, 2, 20));
-        ofNoFill;
-        Glossy.draw(mapCentX, mapCentY, ofMap(blobConnect[i], 0, 40, 10, 100),ofMap(blobConnect[i], 0, 40, 10, 100));
+        ofNoFill;*/
+        Glossy.draw(mapCentX-(ofMap(blobConnect[i], 0, 40, 10, 100)/2), 
+                    mapCentY-(ofMap(blobConnect[i], 0, 40, 10, 100)/2), 
+                    ofMap(blobConnect[i], 0, 40, 10, 100),
+                    ofMap(blobConnect[i], 0, 40, 10, 100));
         ofSetColor(255, 255, 255, 255);
-        Bauer.drawString(ofToString(blobConnect[i]), mapCentX-5,mapCentY+5);  
+        Bauer.drawString(ofToString(blobConnect[i]), mapCentX-12,mapCentY+5);  
     }
     
     //Information display
